@@ -22,13 +22,13 @@ const AdvanceSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "User"
         },  
-        observation: [{
+        observation: {admin:{
             type: Schema.Types.ObjectId,
             ref: "User"
-        },{
+        },descriptionObservation:{
             type: String,
             default: 'null',            
-        }]              
+        }}              
     },
     { timestamps: true }
 )
