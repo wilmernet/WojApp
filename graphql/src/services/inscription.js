@@ -1,16 +1,19 @@
 const Inscription = require('../models/inscription')
+const userService= require('./user')
+const projectService= require('./project')
 
 createInscription = async (inscription) => {
     let inscriptionInstance = new User(inscription)
-    inscription = await inscriptionInstance.save()
-    return inscription
+    created_inscription = await inscriptionInstance.save()
+    await userService.updateAdvance(inscription['studentName'], created_inscription['_id'])
+    await projectService.updateProject(inscription['proyect'], created_inscription['_id'])
+    return created_inscription
 }
 
 getInscriptions = async () => {
     let inscription = await inscription.find({})
-    .populate("projects")
+    .populate("project")
     .populate("estudentName")
-    .populate("observation.admin")
     return inscription
 }
 

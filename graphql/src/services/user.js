@@ -2,8 +2,8 @@ const User = require('../models/user')
 
 createUser = async (user) => {
     let userInstance = new User(user)
-    user = await userInstance.save()
-    return user
+    created_user = await userInstance.save()
+    return created_user
 }
 
 getUser = async () => {
@@ -30,10 +30,30 @@ updateProject = async (userId, projectId) => {
     return user
 }
 
+updateInscription = async (userId, inscriptionId) => {
+    user = await User.findByIdAndUpdate(userId, {
+        $push:{
+            inscriptions: inscriptionId
+        }
+    })
+    return user
+}
+
+updateAdvance = async (userId, advanceId) => {
+    user = await User.findByIdAndUpdate(userId, {
+        $push:{
+            advances: advanceId
+        }
+    })
+    return user
+}
+
 module.exports = {
     createUser,
     getUser,
     getUserById,
     updateUser,
-    updateProject
+    updateProject,
+    updateInscription,
+    updateAdvance
 }

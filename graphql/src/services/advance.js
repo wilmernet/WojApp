@@ -1,14 +1,18 @@
 const Advance = require('../models/advance')
+const userService= require('./user')
+const projectService= require('./project')
 
 createAdvance = async (advance) => {
     let advanceInstance = new Advance(advance)
-    advance = await advanceInstance.save()
-    return advance
+    created_advance = await advanceInstance.save()
+    await userService.updateAdvance(advance['estudentName'], created_advance['_id'])
+    await projectService.updateProject(advance['project'], created_advance['_id'])
+    return created_advance
 }
 
 getAdvances  = async () => {
     let advance = await Advance.find({})
-    .populate("projects")
+    .populate("project")
     .populate("estudentName")
     .populate("observation.admin")
     return advance

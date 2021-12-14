@@ -24,9 +24,29 @@ updateProject = async(projectId, project) => {
     return new_project
 }
 
+updateAdvance = async (projectId, advanceId) => {
+    project = await User.findByIdAndUpdate(projectId, {
+        $push:{
+            advances: advanceId
+        }
+    })
+    return project
+}
+
+updateInscription = async (projectId, inscriptionId) => {
+    project = await User.findByIdAndUpdate(projectId, {
+        $push:{
+            inscriptions: inscriptionId
+        }
+    })
+    return project
+}
+
 module.exports = {
     createProject,
     getProjects,
     getProjectById,
-    updateProject
+    updateProject,
+    updateAdvance,
+    updateInscription
 }
