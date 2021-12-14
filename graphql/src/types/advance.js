@@ -6,12 +6,16 @@ const advanceType = gql`
     scalar Date
     type Advance{
         _id: ID!
-        projectName: [Project]
+        project: Project
         advanceDate: Date!
         description: String!
-        estudentName: [User]!
-        observation: [[User],String]!
+        estudentName: User!
+        observation: {
+            admin:User,
+            description: String
+        }!
     }
+
     type User{
         _id: ID!
         name: String!
@@ -23,9 +27,10 @@ const advanceType = gql`
         password: String!
         projects:[Project]
     }
+    
     type Project{
         _id: ID!
-        projectName: String!
+        project: String!
         generalObjectives: String
         specificObjectives: String
         budget: Int
@@ -38,30 +43,32 @@ const advanceType = gql`
     }
 
     type Query {
-        getAdvance: [Advance]
+        getAdvances: [Advance]
         getAdvanceById(_id:String): Advance
     }
 
     type Mutation {
         createAdvance(
-            name: String!
-            lastname: String!
-            userIdentify: String!
-            role: String
-            status: String
-            email: String!
-            password: String!
-        ): User
+            project: Project
+            advanceDate: Date!
+            description: String!
+            estudentName: User!
+            observation: {
+                admin:User,
+                description: String
+            }!
+        ): Advance
         updateAdvance(
             _id: ID!
-            name: String
-            lastname: String
-            userIdentify: String!
-            role: String
-            status: String
-            email: String!
-            password: String
-        ): User
+            project: Project
+            advanceDate: Date!
+            description: String!
+            estudentName: User!
+            observation: {
+                admin:User,
+                description: String
+            }!
+        ): Advance
     }
 `;
 
