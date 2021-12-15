@@ -8,8 +8,7 @@ const inscriptionType = gql`
         _id: ID!
         project: Project!
         estudentName: User!
-        advanceDate: Date!
-        status_description: String!        
+        status_inscription: String!        
         admissionDate: Date
         egressDate: Date
     }
@@ -45,11 +44,10 @@ const inscriptionType = gql`
     }
 
     type Mutation {
-        createInscription(
+        createInscription(        
             project: Project!
             estudentName: User!
-            advanceDate: Date!
-            status_description: String!        
+            status_inscription: String!        
             admissionDate: Date
             egressDate: Date
         ): Inscription
@@ -57,8 +55,7 @@ const inscriptionType = gql`
             _id: ID!
             project: Project!
             estudentName: User!
-            advanceDate: Date!
-            status_description: String!        
+            status_inscription: String!        
             admissionDate: Date
             egressDate: Date
         ): Inscription
